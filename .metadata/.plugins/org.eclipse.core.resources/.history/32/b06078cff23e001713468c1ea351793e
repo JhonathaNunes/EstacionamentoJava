@@ -1,0 +1,12 @@
+package br.senai.sp.DAO;
+
+import br.senai.sp.models.Caixa;
+
+public class CaixaDAO {
+	public boolean abrirCaixa(Caixa caixa){
+		boolean aberto =  
+		
+		return false;
+		
+	}
+}

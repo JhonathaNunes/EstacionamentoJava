@@ -1,0 +1,14 @@
+package br.senai.sp.view;
+
+import javax.swing.JPanel;
+
+public class Test extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public Test() {
+
+	}
+
+}

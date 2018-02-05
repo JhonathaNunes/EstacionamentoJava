@@ -1,0 +1,13 @@
+package br.senai.sp.DAO;
+
+import br.senai.sp.models.Veiculo;
+
+public class VeiculoDAO {
+
+	public boolean cadVeiculo(Veiculo veic){
+		 boolean cadastrado;
+		 
+		 String sql = "INSERT INTO tbl_veiculo (placa, cor, modelo, ano, idTipoVeiculo) VALUES ();"
+	}
+	
+}

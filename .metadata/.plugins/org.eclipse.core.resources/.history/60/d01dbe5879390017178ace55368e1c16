@@ -1,0 +1,18 @@
+package br.senai.sp.DAO;
+
+import java.util.ArrayList;
+
+import br.senai.sp.models.TipoVeiculo;
+import br.senai.sp.utils.FabricaConexao;
+
+public class TipoVeiculoDAO {
+
+	public ArrayList<TipoVeiculo> mostrarTiposVeiculo(){
+		
+		ArrayList<TipoVeiculo> tipoVeic = new ArrayList<>();
+		
+		String sql = "SELECT descricao FROM tbl_tipoveiculo;";
+		
+		FabricaConexao fab = new FabricaConexao()
+	}
+}

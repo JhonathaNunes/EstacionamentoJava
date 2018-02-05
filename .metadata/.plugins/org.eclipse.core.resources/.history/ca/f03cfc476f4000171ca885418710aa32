@@ -1,0 +1,13 @@
+package br.senai.sp.utils;
+
+public class Data {
+	
+	public static String dataParaMysql(){
+		String dataMysql;
+		
+		java.sql.Date data = new java.sql.Date(System.currentTimeMillis()
+				
+		dataMysql = data;
+		
+	}
+}

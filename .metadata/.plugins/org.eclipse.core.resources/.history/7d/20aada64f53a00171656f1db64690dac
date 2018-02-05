@@ -1,0 +1,124 @@
+package br.senai.sp.view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.ImageIcon;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class FrmEntradaVeiculos extends JInternalFrame {
+	private JTextField txtPlaca;
+	private JTextField txtModelo;
+	private JTextField txtDono;
+	private JTextField txtCor;
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmEntradaVeiculos() {
+		setTitle("Entrada de Ve\u00EDculos");
+		setFrameIcon(new ImageIcon(FrmEntradaVeiculos.class.getResource("/br/senai/sp/imagens/IconeApp.png")));
+		setBounds(100, 100, 290, 352);
+		getContentPane().setLayout(null);
+		
+		JLabel lblPlaca = new JLabel("Placa:");
+		lblPlaca.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblPlaca.setBounds(10, 45, 46, 14);
+		getContentPane().add(lblPlaca);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(0, 0, 274, 34);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblEntradaDeVeculos = new JLabel("Entrada de Ve\u00EDculos");
+		lblEntradaDeVeculos.setForeground(new Color(0, 153, 255));
+		lblEntradaDeVeculos.setFont(new Font("Arial", Font.BOLD, 14));
+		lblEntradaDeVeculos.setBounds(0, 0, 162, 34);
+		panel.add(lblEntradaDeVeculos);
+		
+		txtPlaca = new JTextField();
+		txtPlaca.setBounds(52, 43, 123, 20);
+		getContentPane().add(txtPlaca);
+		txtPlaca.setColumns(10);
+		
+		JLabel lblOp = new JLabel("Op\u00E7\u00E3o:");
+		lblOp.setBounds(10, 88, 46, 14);
+		getContentPane().add(lblOp);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Avulsa", "Di\u00E1ria"}));
+		comboBox.setBounds(10, 99, 57, 20);
+		getContentPane().add(comboBox);
+		
+		JLabel lblModelo = new JLabel("Modelo:");
+		lblModelo.setBounds(106, 88, 46, 14);
+		getContentPane().add(lblModelo);
+		
+		txtModelo = new JTextField();
+		txtModelo.setBounds(106, 99, 158, 20);
+		getContentPane().add(txtModelo);
+		txtModelo.setColumns(10);
+		
+		JLabel lblTipo = new JLabel("Tipo:");
+		lblTipo.setBounds(10, 140, 46, 14);
+		getContentPane().add(lblTipo);
+		
+		JComboBox cbTipo = new JComboBox();
+		cbTipo.setModel(new DefaultComboBoxModel(new String[] {"Moto", "Carro", "Van"}));
+		cbTipo.setBounds(10, 154, 57, 20);
+		getContentPane().add(cbTipo);
+		
+		JLabel lblDono = new JLabel("Dono:");
+		lblDono.setBounds(10, 202, 46, 14);
+		getContentPane().add(lblDono);
+		
+		txtDono = new JTextField();
+		txtDono.setBounds(10, 215, 254, 20);
+		getContentPane().add(txtDono);
+		txtDono.setColumns(10);
+		
+		JLabel lblCor = new JLabel("Cor:");
+		lblCor.setBounds(106, 140, 46, 14);
+		getContentPane().add(lblCor);
+		
+		txtCor = new JTextField();
+		txtCor.setBounds(106, 154, 158, 20);
+		getContentPane().add(txtCor);
+		txtCor.setColumns(10);
+		
+		JButton btnSalvar = new JButton("");
+		btnSalvar.setIcon(new ImageIcon(FrmEntradaVeiculos.class.getResource("/br/senai/sp/imagens/salvar.png")));
+		btnSalvar.setBounds(152, 263, 51, 34);
+		getContentPane().add(btnSalvar);
+		
+		JButton btnCancel = new JButton("");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int res = JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar?", "Confirmação",
+						JOptionPane.YES_NO_OPTION);
+
+				if (res == 0) {
+					dispose();
+				}
+			}
+		});
+		btnCancel.setIcon(new ImageIcon(FrmEntradaVeiculos.class.getResource("/br/senai/sp/imagens/sair.png")));
+		btnCancel.setBounds(213, 263, 51, 34);
+		getContentPane().add(btnCancel);
+
+	}
+}

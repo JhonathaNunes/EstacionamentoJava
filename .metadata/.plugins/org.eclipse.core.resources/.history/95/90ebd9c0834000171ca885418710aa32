@@ -1,0 +1,31 @@
+package br.senai.sp.DAO;
+
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+import br.senai.sp.models.Cliente;
+import br.senai.sp.utils.FabricaConexao;
+
+public class ClienteDAO {
+	
+	
+	public boolean cadastrarCliente(Cliente cliente){
+		boolean cadastrado;
+		
+		String sql = "INSERT INTO tbl_cliente (nome, telefone, logradouro, numero, bairro, "
+				+ "cidade, estado, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+		
+		FabricaConexao fab = new FabricaConexao();
+		Connection con = fab.abrirConexao();
+		
+		try {
+			PreparedStatement stm = (PreparedStatement) con.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+}

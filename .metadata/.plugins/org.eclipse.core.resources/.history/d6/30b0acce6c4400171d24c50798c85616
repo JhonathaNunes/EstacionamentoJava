@@ -1,0 +1,73 @@
+package br.senai.sp.DAO;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+import br.senai.sp.models.TipoCobranca;
+import br.senai.sp.models.TipoVeiculo;
+import br.senai.sp.utils.FabricaConexao;
+
+public class TipoCobrancaDAO {
+
+	
+	public void  mostrarTiposCobr(JComboBox cmbBoxTipoCobranca){
+			
+			String sql = "SELECT descricao FROM tbl_tipocobranca;";
+			
+			FabricaConexao fab = new FabricaConexao();
+			Connection con = fab.abrirConexao();
+			
+			ResultSet rs;
+			
+			cmbBoxTipoCobranca.removeAllItems();  // remove todos os itens do combom
+	        DefaultComboBoxModel comboBoxMode = (DefaultComboBoxModel) cmbBoxTipoCobranca.getModel();
+			
+			try {
+				PreparedStatement stm = (PreparedStatement) con.prepareStatement(sql);
+				rs = stm.executeQuery();
+				
+				while(rs.next()){
+					String desc = rs.getString("descricao");
+					cmbBoxTipoCobranca.addItem(desc);
+				}
+				fab.fecharConexao();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
+	public TipoCobranca setIdCobranca(TipoCobranca tpCobr){
+		
+		String sql = "SELECT idTipoCobranca FROM tbl_tipocobranca WHERE descricao = ?;";
+		
+		FabricaConexao fab = new FabricaConexao();
+		Connection con = fab.abrirConexao();
+		
+		ResultSet rs;
+		
+		try {
+			PreparedStatement stm = (PreparedStatement) con.prepareStatement(sql);
+			
+			stm.setString(1, tpCobr.getDescricao());
+			rs = stm.executeQuery();
+			
+			while(rs.next()){
+				tpCobr.setIdCobranca(rs.getInt("idTipoCobranca")); 
+			}
+			
+			fab.fecharConexao();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return tpCobr;
+	}
+}

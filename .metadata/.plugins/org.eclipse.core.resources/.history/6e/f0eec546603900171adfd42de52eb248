@@ -1,0 +1,37 @@
+package br.senai.sp.view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class FrmLogin extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtUsuario;
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmLogin() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 340, 246);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
+		lblUsurio.setBounds(10, 46, 46, 14);
+		contentPane.add(lblUsurio);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(72, 43, 86, 20);
+		contentPane.add(txtUsuario);
+		txtUsuario.setColumns(10);
+	}
+}

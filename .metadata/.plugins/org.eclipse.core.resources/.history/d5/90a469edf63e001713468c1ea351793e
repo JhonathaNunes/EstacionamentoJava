@@ -1,0 +1,51 @@
+package br.senai.sp.models;
+
+public class Caixa {
+
+	private int idCaixa;
+	private String dtAbertura;
+	private double valorAbertura;
+	private String dtFechamento;
+	private double valorFechamento;
+
+	public int getIdCaixa() {
+		return idCaixa;
+	}
+
+	public void setIdCaixa(int idCaixa) {
+		this.idCaixa = idCaixa;
+	}
+
+	public String getDtAbertura() {
+		return dtAbertura;
+	}
+
+	public void setDtAbertura(String dtAbertura) {
+		this.dtAbertura = dtAbertura;
+	}
+
+	public double getValorAbertura() {
+		return valorAbertura;
+	}
+
+	public void setValorAbertura(float valorAbertura) {
+		this.valorAbertura = valorAbertura;
+	}
+
+	public String getDtFechamento() {
+		return dtFechamento;
+	}
+
+	public void setDtFechamento(String dtFechamento) {
+		this.dtFechamento = dtFechamento;
+	}
+
+	public double getValorFechamento() {
+		return valorFechamento;
+	}
+
+	public void setValorFechamento(float valorFechamento) {
+		this.valorFechamento = valorFechamento;
+	}
+
+}

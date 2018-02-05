@@ -1,0 +1,45 @@
+package br.senai.sp.DAO;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+import br.senai.sp.models.TipoVeiculo;
+import br.senai.sp.utils.FabricaConexao;
+
+public class TipoVeiculoDAO {
+
+	public void  mostrarTiposVeiculo(JComboBox cmbBoxTipoVeiculo){
+		
+		String sql = "SELECT descricao FROM tbl_tipoveiculo;";
+		
+		FabricaConexao fab = new FabricaConexao();
+		Connection con = fab.abrirConexao();
+		
+		ResultSet rs;
+		
+		cmbBoxTipoVeiculo.removeAllItems();  // remove todos os itens do combom
+		cmbBoxTipoVeiculo.addItem("Escolha"); // adiciona o  Escolha no ComboBox 
+        DefaultComboBoxModel comboBoxMode = (DefaultComboBoxModel) cmbBoxTipoVeiculo.getModel();
+		
+		try {
+			PreparedStatement stm = (PreparedStatement) con.prepareStatement(sql);
+			rs = stm.executeQuery();
+			
+			while(rs.next()){
+				TipoVeiculo tpV = new TipoVeiculo();
+				tpV.setDescricao(rs.getString("descricao"));
+			}
+			fab.fecharConexao();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,13 @@
+package br.senai.sp.app;
+
+import br.senai.sp.view.FrmLogin;
+
+public class App {
+
+	public static void main(String[] args) {
+		
+		FrmLogin login = new FrmLogin();
+		login.setVisible(true);
+	}
+
+}

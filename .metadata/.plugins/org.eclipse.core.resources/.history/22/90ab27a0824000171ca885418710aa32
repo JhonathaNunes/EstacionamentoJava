@@ -1,0 +1,15 @@
+package br.senai.sp.DAO;
+
+import br.senai.sp.models.Cliente;
+
+public class ClienteDAO {
+	
+	
+	public boolean cadastrarCliente(Cliente cliente){
+		boolean cadastrado;
+		
+		String sql = "INSERT INTO tbl_cliente (nome, telefone, logradouro, numero, bairro, "
+				+ "cidade, estado, cep) VALUES (?,?,?,?,?,?,?,?)"
+		
+	}
+}

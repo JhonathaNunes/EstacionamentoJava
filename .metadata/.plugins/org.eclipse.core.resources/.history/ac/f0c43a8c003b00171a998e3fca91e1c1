@@ -1,0 +1,205 @@
+package br.senai.sp.view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.border.EtchedBorder;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.table.DefaultTableModel;
+
+import br.senai.sp.DAO.UsuarioDAO;
+import br.senai.sp.models.Usuario;
+
+import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.JCheckBox;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class FrmUsuario extends JInternalFrame {
+	private JTable tblUsuario;
+	private DefaultTableModel model = new DefaultTableModel();
+	private JScrollPane scrollPane;
+	private JTabbedPane tabbedPane;
+	private JTextField txtNome;
+	private JTextField textField;
+	/**
+	 * Create the frame.
+	 */
+	public FrmUsuario() {
+		setBounds(100, 100, 446, 406);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(0, 0, 434, 43);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblCadastroDeUsurios = new JLabel("Cadastro de Usu\u00E1rios");
+		lblCadastroDeUsurios.setForeground(new Color(0, 153, 255));
+		lblCadastroDeUsurios.setFont(new Font("Arial", Font.BOLD, 14));
+		lblCadastroDeUsurios.setBounds(10, 0, 174, 43);
+		panel.add(lblCadastroDeUsurios);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(FrmUsuario.class.getResource("/br/senai/sp/imagens/User.png")));
+		lblNewLabel.setBounds(379, 0, 32, 43);
+		panel.add(lblNewLabel);
+		
+		
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_1.setBounds(10, 305, 409, 60);
+		getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		JButton btnAdicionar = new JButton("");
+		btnAdicionar.setIcon(new ImageIcon(FrmUsuario.class.getResource("/br/senai/sp/imagens/add.png")));
+		btnAdicionar.setBounds(21, 11, 40, 40);
+		panel_1.add(btnAdicionar);
+		
+		JButton btnExcluir = new JButton("");
+		btnExcluir.setIcon(new ImageIcon(FrmUsuario.class.getResource("/br/senai/sp/imagens/delete.png")));
+		btnExcluir.setBounds(171, 11, 40, 40);
+		panel_1.add(btnExcluir);
+		
+		JButton btnEditar = new JButton("");
+		btnEditar.setIcon(new ImageIcon(FrmUsuario.class.getResource("/br/senai/sp/imagens/edit.png")));
+		btnEditar.setBounds(71, 11, 40, 40);
+		panel_1.add(btnEditar);
+		
+		JButton btnDetalhes = new JButton("");
+		btnDetalhes.setIcon(new ImageIcon(FrmUsuario.class.getResource("/br/senai/sp/imagens/details.png")));
+		btnDetalhes.setBounds(121, 11, 40, 40);
+		panel_1.add(btnDetalhes);
+		
+		JButton btnSair = new JButton("");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int res = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Confirmação",
+						JOptionPane.YES_NO_OPTION);
+
+				if (res == 0) {
+					dispose();
+				}
+			}
+		});
+		btnSair.setIcon(new ImageIcon(FrmUsuario.class.getResource("/br/senai/sp/imagens/exit.png")));
+		btnSair.setBounds(359, 11, 40, 40);
+		panel_1.add(btnSair);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 54, 410, 234);
+		getContentPane().add(tabbedPane);
+		
+		criarTblUsers();
+		
+	}
+	
+	public void criarTblUsers(){
+		tblUsuario = new JTable(model);
+		model.setNumRows(0);
+		model.setColumnCount(0);
+		model.addColumn("Nome");
+		model.addColumn("Telefone");
+		model.addColumn("Usuario");
+		model.addColumn("Privilegio");
+		
+		tblUsuario.getColumnModel().getColumn(0).setResizable(false);
+		tblUsuario.getColumnModel().getColumn(1).setResizable(false);
+		tblUsuario.getColumnModel().getColumn(2).setResizable(false);
+		tblUsuario.getColumnModel().getColumn(3).setResizable(false);
+		tblUsuario.getColumnModel().getColumn(0).setPreferredWidth(150);
+		tblUsuario.getColumnModel().getColumn(1).setPreferredWidth(100);
+		tblUsuario.getColumnModel().getColumn(2).setPreferredWidth(50);
+		tblUsuario.getColumnModel().getColumn(3).setPreferredWidth(50);
+		
+		tblUsuario.getTableHeader().setReorderingAllowed(false);
+		
+		UsuarioDAO usrDAO = new UsuarioDAO();
+		for(Usuario u : usrDAO.criarTblUsuario()){
+			model.addRow(new Object[] { u.getNome(), u.getTelefone(), u.getUsuario(), u.getPrivilegio() });
+		}
+		
+		scrollPane = new JScrollPane();
+		tabbedPane.addTab("Usuários", null, scrollPane, null);
+		scrollPane.setViewportView(tblUsuario);
+		
+		JPanel panelDetails = new JPanel();
+		tabbedPane.addTab("Detalhes", null, panelDetails, null);
+		panelDetails.setLayout(null);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNome.setBounds(10, 11, 46, 14);
+		panelDetails.add(lblNome);
+		
+		JLabel lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblTelefone.setBounds(10, 64, 80, 14);
+		panelDetails.add(lblTelefone);
+		
+		JPanel panel = new JPanel();
+		panel.setForeground(Color.BLACK);
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Dados para Login:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 153, 255)));
+		panel.setBounds(258, 12, 137, 148);
+		panelDetails.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
+		lblUsurio.setBounds(10, 28, 51, 15);
+		panel.add(lblUsurio);
+		lblUsurio.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		JLabel lblSenha = new JLabel("Senha:");
+		lblSenha.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblSenha.setBounds(10, 70, 51, 15);
+		panel.add(lblSenha);
+		
+		JCheckBox chckbxAtivo = new JCheckBox("Ativo");
+		chckbxAtivo.setFont(new Font("Arial", Font.PLAIN, 12));
+		chckbxAtivo.setBounds(6, 107, 97, 23);
+		panel.add(chckbxAtivo);
+		
+		JLabel lblPrivilgio = new JLabel("Privil\u00E9gio:");
+		lblPrivilgio.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblPrivilgio.setBounds(155, 64, 80, 15);
+		panelDetails.add(lblPrivilgio);
+		
+		txtNome = new JTextField();
+		txtNome.setToolTipText("");
+		txtNome.setBounds(10, 33, 238, 20);
+		panelDetails.add(txtNome);
+		txtNome.setColumns(10);
+		
+		textField = new JTextField();
+		textField.setBounds(10, 89, 121, 20);
+		panelDetails.add(textField);
+		textField.setColumns(10);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Administrador", "Operador"}));
+		comboBox.setBounds(155, 90, 87, 20);
+		panelDetails.add(comboBox);
+		
+	}
+}

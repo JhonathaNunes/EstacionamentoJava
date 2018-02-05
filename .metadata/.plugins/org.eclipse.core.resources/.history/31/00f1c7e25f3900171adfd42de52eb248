@@ -1,0 +1,93 @@
+package br.senai.sp.view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JMenuBar;
+import javax.swing.JDesktopPane;
+import java.awt.Color;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.ImageIcon;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+public class FrmMain extends JFrame {
+
+	private JPanel contentPane;
+
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmMain() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1000, 626);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu menu = new JMenu("");
+		menuBar.add(menu);
+		
+		JMenu mnSistema = new JMenu("Sistema");
+		menuBar.add(mnSistema);
+		
+		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.setIcon(new ImageIcon(FrmMain.class.getResource("/br/senai/sp/imagens/exit.png")));
+		mnSistema.add(mntmSair);
+		
+		JMenu mnCaixa = new JMenu("Caixa");
+		menuBar.add(mnCaixa);
+		
+		JMenuItem mntmAbrirCaixa = new JMenuItem("Abrir Caixa");
+		mntmAbrirCaixa.setIcon(new ImageIcon(FrmMain.class.getResource("/br/senai/sp/imagens/abrir_caixa.png")));
+		mnCaixa.add(mntmAbrirCaixa);
+		
+		JMenuItem mntmFecharCaixa = new JMenuItem("Fechar Caixa");
+		mntmFecharCaixa.setIcon(new ImageIcon(FrmMain.class.getResource("/br/senai/sp/imagens/fechar_caixa.png")));
+		mnCaixa.add(mntmFecharCaixa);
+		
+		JMenu mnEstacionamento = new JMenu("Estacionamento");
+		menuBar.add(mnEstacionamento);
+		
+		JMenuItem mntmEntradaDeVeculos = new JMenuItem("Entrada de Ve\u00EDculos");
+		mntmEntradaDeVeculos.setIcon(new ImageIcon(FrmMain.class.getResource("/br/senai/sp/imagens/carro_entrando.png")));
+		mnEstacionamento.add(mntmEntradaDeVeculos);
+		
+		JMenuItem mntmSadaDeVeculos = new JMenuItem("Sa\u00EDda de Ve\u00EDculos");
+		mntmSadaDeVeculos.setIcon(new ImageIcon(FrmMain.class.getResource("/br/senai/sp/imagens/carro_saindo.png")));
+		mnEstacionamento.add(mntmSadaDeVeculos);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBackground(Color.LIGHT_GRAY);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
+						.addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+					.addGap(0))
+		);
+		contentPane.setLayout(gl_contentPane);
+	}
+}

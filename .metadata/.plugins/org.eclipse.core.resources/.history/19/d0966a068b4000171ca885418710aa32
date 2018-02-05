@@ -1,0 +1,10 @@
+package br.senai.sp.models;
+
+public class TipoCobranca {
+	
+	private int idCobranca;
+	private String descricao;
+	
+	
+
+}

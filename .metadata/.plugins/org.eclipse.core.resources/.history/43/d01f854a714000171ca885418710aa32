@@ -1,0 +1,32 @@
+package br.senai.sp.app;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import br.senai.sp.DAO.CaixaDAO;
+import br.senai.sp.models.Caixa;
+
+public class Testa {
+	public static void main(String[] args) {
+		/*java.sql.Date data = new java.sql.Date(System.currentTimeMillis());
+	
+		System.out.print(data);*/
+		
+		/*Caixa caixa = new Caixa();
+		CaixaDAO dao = new CaixaDAO();
+		
+		caixa.setDtAbertura("2017-05-22");
+		caixa.setValorAbertura(10.00);
+		
+		dao.abrirCaixa(caixa);
+		*/
+		
+		GregorianCalendar teste = new GregorianCalendar();
+		SimpleDateFormat teste2 = new SimpleDateFormat("HH:mm:h");
+		System.out.println(teste2.format(teste.getTime()));
+	}
+	
+	
+}

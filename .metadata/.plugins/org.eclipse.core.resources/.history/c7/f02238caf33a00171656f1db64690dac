@@ -1,0 +1,51 @@
+package br.senai.sp.view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+
+public class FrmUsuario extends JInternalFrame {
+	private JTable tblUsuarios = new JTable();
+	/**
+	 * Create the frame.
+	 */
+	public FrmUsuario() {
+		setBounds(100, 100, 445, 390);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(0, 0, 434, 43);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblCadastroDeUsurios = new JLabel("Cadastro de Usu\u00E1rios");
+		lblCadastroDeUsurios.setForeground(new Color(0, 153, 255));
+		lblCadastroDeUsurios.setFont(new Font("Arial", Font.BOLD, 14));
+		lblCadastroDeUsurios.setBounds(10, 0, 174, 43);
+		panel.add(lblCadastroDeUsurios);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(FrmUsuario.class.getResource("/br/senai/sp/imagens/User.png")));
+		lblNewLabel.setBounds(379, 0, 32, 43);
+		panel.add(lblNewLabel);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 54, 409, 268);
+		getContentPane().add(tabbedPane);
+		
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Usu\u00E1rios", null, tabbedPane_1, null);
+		
+		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Detalhes", null, tabbedPane_2, null);
+
+	}
+}

@@ -1,0 +1,16 @@
+package br.senai.sp.utils;
+
+import java.sql.Date;
+
+public class DataHora {
+	
+	public static Date dataParaMysql(){
+		Date dataMysql;
+		
+		java.sql.Date data = new java.sql.Date(System.currentTimeMillis());
+				
+		dataMysql = data;
+		
+		return dataMysql;
+	}
+}

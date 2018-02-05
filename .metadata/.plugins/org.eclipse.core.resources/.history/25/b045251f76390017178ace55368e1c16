@@ -1,0 +1,34 @@
+package br.senai.sp.view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.ImageIcon;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import java.awt.Font;
+
+public class FrmEntradaVeiculos extends JInternalFrame {
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmEntradaVeiculos() {
+		setTitle("Entrada de Ve\u00EDculos");
+		setFrameIcon(new ImageIcon(FrmEntradaVeiculos.class.getResource("/br/senai/sp/imagens/IconeApp.png")));
+		setBounds(100, 100, 343, 470);
+		getContentPane().setLayout(null);
+		
+		JLabel lblPlaca = new JLabel("Placa:");
+		lblPlaca.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblPlaca.setBounds(10, 70, 46, 14);
+		getContentPane().add(lblPlaca);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 327, 34);
+		getContentPane().add(panel);
+
+	}
+}

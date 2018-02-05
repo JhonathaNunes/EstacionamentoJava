@@ -1,0 +1,58 @@
+package br.senai.sp.DAO;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+import br.senai.sp.models.Usuario;
+import br.senai.sp.utils.FabricaConexao;
+
+public class UsuarioDAO {
+
+	
+	/*public boolean cadUsuario(Usuario user){
+		boolean cadastrado;
+		
+		
+		
+	}*/
+	
+	public ArrayList<Usuario> criarTblUsuario(){
+		
+		ArrayList<Usuario> usuario = new ArrayList<>();
+		
+		String sql = "SELECT nome, telefone, usuario, privilegio FROM tbl_usuario;";
+		
+		FabricaConexao fab = new FabricaConexao();
+		Connection con = fab.abrirConexao();
+		
+		ResultSet rs;
+		
+		try {
+			PreparedStatement stm = (PreparedStatement) con.prepareStatement(sql);
+			
+			rs = stm.executeQuery();
+			
+			while (rs.next()){
+				Usuario usr = new Usuario();
+				
+				usr.setNome(rs.getString("nome"));
+				usr.setTelefone(rs.getString("telefone"));
+				usr.setUsuario(rs.getString("usuario"));
+				usr.setPrivilegio(rs.getString("privilegio"));
+				
+				usuario.add(usr);
+				
+			}
+			
+			fab.fecharConexao();
+			
+			return usuario;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}

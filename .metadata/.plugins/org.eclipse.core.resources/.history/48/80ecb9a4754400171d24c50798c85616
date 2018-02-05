@@ -1,0 +1,120 @@
+package br.senai.sp.view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+
+public class FrmCadCliente extends JDialog {
+	private JTextField txtNome;
+	private JTextField txtTel;
+	private JTextField txtLog;
+	private JTextField txtNum;
+	private JTextField txtBairro;
+	private JTextField txtCity;
+	private JTextField txtEstado;
+	private JTextField txtCEP;
+	/**
+	 * Create the dialog.
+	 */
+	public FrmCadCliente() {
+		setBounds(100, 100, 408, 363);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(0, 0, 392, 41);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblCadastroDeCliente = new JLabel("Cadastro de Cliente");
+		lblCadastroDeCliente.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCadastroDeCliente.setForeground(new Color(0, 153, 255));
+		lblCadastroDeCliente.setBounds(10, 11, 221, 25);
+		panel.add(lblCadastroDeCliente);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(25, 72, 46, 14);
+		getContentPane().add(lblNome);
+		
+		txtNome = new JTextField();
+		txtNome.setBounds(25, 90, 225, 20);
+		getContentPane().add(txtNome);
+		txtNome.setColumns(10);
+		
+		JLabel lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setBounds(260, 72, 46, 14);
+		getContentPane().add(lblTelefone);
+		
+		txtTel = new JTextField();
+		txtTel.setBounds(260, 90, 115, 20);
+		getContentPane().add(txtTel);
+		txtTel.setColumns(10);
+		
+		JLabel lblLogradouro = new JLabel("Logradouro:");
+		lblLogradouro.setBounds(25, 126, 105, 14);
+		getContentPane().add(lblLogradouro);
+		
+		txtLog = new JTextField();
+		txtLog.setBounds(25, 141, 165, 20);
+		getContentPane().add(txtLog);
+		txtLog.setColumns(10);
+		
+		JLabel lblNmero = new JLabel("N\u00FAmero:");
+		lblNmero.setBounds(260, 126, 46, 14);
+		getContentPane().add(lblNmero);
+		
+		txtNum = new JTextField();
+		txtNum.setBounds(260, 141, 115, 20);
+		getContentPane().add(txtNum);
+		txtNum.setColumns(10);
+		
+		JLabel lblBairro = new JLabel("Bairro:");
+		lblBairro.setBounds(25, 181, 46, 14);
+		getContentPane().add(lblBairro);
+		
+		txtBairro = new JTextField();
+		txtBairro.setBounds(25, 192, 165, 20);
+		getContentPane().add(txtBairro);
+		txtBairro.setColumns(10);
+		
+		JLabel lblCidade = new JLabel("Cidade:");
+		lblCidade.setBounds(260, 181, 46, 14);
+		getContentPane().add(lblCidade);
+		
+		txtCity = new JTextField();
+		txtCity.setBounds(260, 192, 115, 20);
+		getContentPane().add(txtCity);
+		txtCity.setColumns(10);
+		
+		JLabel lblEstado = new JLabel("Estado:");
+		lblEstado.setBounds(25, 233, 46, 14);
+		getContentPane().add(lblEstado);
+		
+		txtEstado = new JTextField();
+		txtEstado.setBounds(25, 246, 46, 20);
+		getContentPane().add(txtEstado);
+		txtEstado.setColumns(10);
+		
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setBounds(260, 233, 46, 14);
+		getContentPane().add(lblCep);
+		
+		txtCEP = new JTextField();
+		txtCEP.setBounds(260, 246, 115, 20);
+		getContentPane().add(txtCEP);
+		txtCEP.setColumns(10);
+		
+		JButton btnSalvar = new JButton("");
+		btnSalvar.setIcon(new ImageIcon(FrmCadCliente.class.getResource("/br/senai/sp/imagens/salvar.png")));
+		btnSalvar.setBounds(319, 277, 59, 36);
+		getContentPane().add(btnSalvar);
+
+	}
+}

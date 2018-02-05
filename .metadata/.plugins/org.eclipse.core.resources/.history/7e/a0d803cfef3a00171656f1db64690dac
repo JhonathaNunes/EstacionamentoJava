@@ -1,0 +1,11 @@
+package br.senai.sp.DAO;
+
+public class VeiculoDAO {
+
+	
+	public boolean entradaVeiculo(){
+		
+	}
+	
+	
+}

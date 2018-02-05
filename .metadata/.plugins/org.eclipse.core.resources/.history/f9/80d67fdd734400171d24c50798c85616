@@ -1,0 +1,17 @@
+package br.senai.sp.view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+
+public class FrmCadCliente extends JDialog {
+
+	/**
+	 * Create the dialog.
+	 */
+	public FrmCadCliente() {
+		setBounds(100, 100, 450, 300);
+
+	}
+
+}

@@ -1,0 +1,35 @@
+package br.senai.sp.DAO;
+
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+import br.senai.sp.models.Caixa;
+import br.senai.sp.utils.FabricaConexao;
+
+public class CaixaDAO {
+	public boolean abrirCaixa(Caixa caixa){
+		boolean aberto = false;  
+		
+		String sql = "INSERT INTO tbl_caixa(dtAbertura, valorAbertura) "
+				+ "VALUES(?, ?);";
+		
+		FabricaConexao fab = new FabricaConexao();
+		Connection con = fab.abrirConexao();
+		
+		try {
+			PreparedStatement stm = (PreparedStatement) con.prepareStatement(sql);
+			
+			stm.setString(1, caixa.getDtAbertura());
+			stm.setFloat(2, caixa.getValorAbertura());
+			
+			stm.execute()
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return aberto;
+	}
+}

@@ -1,0 +1,81 @@
+package br.senai.sp.DAO;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+import br.senai.sp.models.Usuario;
+import br.senai.sp.utils.FabricaConexao;
+
+public class UsuarioDAO {
+
+	public boolean cadUsuario(Usuario user) {
+		boolean cadastrado;
+
+		String sql = "INSERT INTO tbl_usuario (nome, telefone, usuario, senha, privilegio, ativo) "
+				+ "VALUES(?, ?, ?, ?, ?, ?);";
+
+		FabricaConexao fab = new FabricaConexao();
+		Connection con = fab.abrirConexao();
+
+		try {
+			PreparedStatement stm = (PreparedStatement) con.prepareStatement(sql);
+
+			stm.setString(1, user.getNome());
+			stm.setString(2, user.getTelefone());
+			stm.setString(3, user.getUsuario());
+			stm.setString(4, user.getSenha());
+			stm.setString(5, user.getPrivilegio());
+			stm.setBoolean(6, user.isAtivo());
+
+			fab.fecharConexao();
+			cadastrado = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			cadastrado = false;
+		}
+
+		return cadastrado;
+
+	}
+
+	public ArrayList<Usuario> criarTblUsuario() {
+
+		ArrayList<Usuario> user = new ArrayList<>();
+
+		String sql = "SELECT nome, telefone, usuario, privilegio FROM tbl_usuario;";
+
+		FabricaConexao fab = new FabricaConexao();
+		Connection con = fab.abrirConexao();
+
+		ResultSet rs;
+
+		try {
+			PreparedStatement stm = (PreparedStatement) con.prepareStatement(sql);
+
+			rs = stm.executeQuery();
+
+			while (rs.next()) {
+				Usuario usr = new Usuario();
+
+				usr.setNome(rs.getString("nome"));
+				usr.setTelefone(rs.getString("telefone"));
+				usr.setUsuario(rs.getString("usuario"));
+				usr.setPrivilegio(rs.getString("privilegio"));
+
+				user.add(usr);
+
+			}
+
+			fab.fecharConexao();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return user;
+	}
+}

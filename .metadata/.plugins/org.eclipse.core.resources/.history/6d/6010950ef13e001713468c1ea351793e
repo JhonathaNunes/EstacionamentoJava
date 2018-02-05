@@ -1,0 +1,9 @@
+package br.senai.sp.app;
+
+import java.util.Date;
+
+public class Testa {
+	Date data = new Date(System.currentTimeMillis());
+	
+	System.out.p
+}

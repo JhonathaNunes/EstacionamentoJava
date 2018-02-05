@@ -1,0 +1,201 @@
+package br.senai.sp.view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import br.senai.sp.DAO.usuarioDAO.UsuarioDAO;
+import br.senai.sp.model.Usuario;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class FrmCadUsuario extends JInternalFrame {
+	private final JPanel panelTtilos = new JPanel();
+	private JTable tabListaUsuários;
+	private JPanel panelUsuariosCadastrados;
+	private DefaultTableModel modelo = new DefaultTableModel();
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmCadUsuario() {
+		setIconifiable(true);
+		setFrameIcon(new ImageIcon(FrmCadUsuario.class.getResource("/br/senai/sp/imagens/user-add-24.png")));
+		setClosable(true);
+		setBounds(100, 100, 500, 350);
+		getContentPane().setLayout(null);
+		panelTtilos.setBackground(Color.DARK_GRAY);
+		panelTtilos.setBounds(0, 0, 484, 42);
+		getContentPane().add(panelTtilos);
+		panelTtilos.setLayout(null);
+
+		JLabel lblCadastroDeUsurios = new JLabel("Cadastro de Usu\u00E1rios");
+		lblCadastroDeUsurios.setForeground(new Color(0, 204, 153));
+		lblCadastroDeUsurios.setFont(new Font("Arial", Font.BOLD, 16));
+		lblCadastroDeUsurios.setBounds(10, 11, 166, 14);
+		panelTtilos.add(lblCadastroDeUsurios);
+
+		JLabel lblIcon = new JLabel("");
+		lblIcon.setIcon(new ImageIcon(FrmCadUsuario.class.getResource("/br/senai/sp/imagens/User.png")));
+		lblIcon.setBounds(408, 0, 46, 42);
+		panelTtilos.add(lblIcon);
+
+		panelUsuariosCadastrados = new JPanel();
+		panelUsuariosCadastrados.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"),
+				"Usu\u00E1rios Cadastrados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelUsuariosCadastrados.setBounds(10, 53, 464, 182);
+		getContentPane().add(panelUsuariosCadastrados);
+		panelUsuariosCadastrados.setLayout(null);
+
+		JPanel panelBotoes = new JPanel();
+		panelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panelBotoes.setBounds(10, 246, 464, 63);
+		getContentPane().add(panelBotoes);
+		panelBotoes.setLayout(null);
+
+		JButton btnAdicionar = new JButton("");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FrmAddUsuario add = new FrmAddUsuario();
+				add.setVisible(true);
+
+			}
+		});
+
+		btnAdicionar.setIcon(new ImageIcon(FrmCadUsuario.class.getResource("/br/senai/sp/imagens/add.png")));
+		btnAdicionar.setBounds(10, 11, 40, 40);
+		panelBotoes.add(btnAdicionar);
+
+		JButton btnAlterar = new JButton("");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Usuario usr = new Usuario();
+				obterCPF(usr);
+				FrmEditarUsuario edit = new FrmEditarUsuario();
+				edit.prencherCampos(usr);
+				edit.setVisible(true);
+			}
+		});
+		btnAlterar.setIcon(new ImageIcon(FrmCadUsuario.class.getResource("/br/senai/sp/imagens/edit.png")));
+		btnAlterar.setBounds(60, 11, 40, 40);
+		panelBotoes.add(btnAlterar);
+
+		JButton btnExcluir = new JButton("");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				UsuarioDAO delUsr = new UsuarioDAO();
+				Usuario usr = new Usuario();
+				obterCPF(usr);
+				delUsr.obterDadosUsuario(usr);
+				
+				int resp;
+				resp = JOptionPane.showConfirmDialog(null, "Deseja mesmo deletar o usuario " + usr.getNome() + "?", "Confirmação",
+						JOptionPane.YES_NO_OPTION);
+				if (resp == 0) {
+					if (delUsr.deletarUsuario(usr) == true) {
+						JOptionPane.showMessageDialog(null, "Usuário deletado com sucesso!!", "Usuario Deletado!!",
+								JOptionPane.INFORMATION_MESSAGE);
+						criarTabelaUsuarios();
+					} else {
+						JOptionPane.showMessageDialog(null, "Erro na tentativa de deletar usuário!!",
+								"Usuário não deletado", JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Usuário não deletado!!", "Usuario Mantido!!",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+
+		btnExcluir.setIcon(new ImageIcon(FrmCadUsuario.class.getResource("/br/senai/sp/imagens/delete.png")));
+		btnExcluir.setBounds(110, 11, 40, 40);
+		panelBotoes.add(btnExcluir);
+
+		JButton btnDetalhes = new JButton("");
+		btnDetalhes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Usuario usr = new Usuario();
+				obterCPF(usr);
+				FrmDetalhesUsuario details = new FrmDetalhesUsuario();
+				details.prencherCampos(usr);
+				details.setVisible(true);
+
+			}
+		});
+		btnDetalhes.setIcon(new ImageIcon(FrmCadUsuario.class.getResource("/br/senai/sp/imagens/details.png")));
+		btnDetalhes.setBounds(160, 11, 40, 40);
+		panelBotoes.add(btnDetalhes);
+
+		JButton btnSair = new JButton("");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int resp;
+				resp = JOptionPane.showConfirmDialog(null, "Deseja fechar a janeja?", "Confirmação",
+						JOptionPane.YES_NO_OPTION);
+				if (resp == 0) {
+					dispose();
+				}
+			}
+		});
+		btnSair.setIcon(new ImageIcon(FrmCadUsuario.class.getResource("/br/senai/sp/imagens/exit.png")));
+		btnSair.setBounds(414, 11, 40, 40);
+		panelBotoes.add(btnSair);
+
+		criarTabelaUsuarios();
+
+	}
+
+	public void criarTabelaUsuarios() {
+
+		tabListaUsuários = new JTable(modelo);
+		modelo.setNumRows(0);
+		modelo.setColumnCount(0);
+		modelo.addColumn("Id");
+		modelo.addColumn("CPF");
+		modelo.addColumn("Nome");
+		modelo.addColumn("E-mail");
+		
+		tabListaUsuários.getColumnModel().getColumn(0).setResizable(false);
+		tabListaUsuários.getColumnModel().getColumn(0).setPreferredWidth(10);
+		tabListaUsuários.getColumnModel().getColumn(1).setResizable(false);
+		tabListaUsuários.getColumnModel().getColumn(1).setPreferredWidth(50);
+		tabListaUsuários.getColumnModel().getColumn(2).setResizable(false);
+		tabListaUsuários.getColumnModel().getColumn(2).setPreferredWidth(115);
+		tabListaUsuários.getColumnModel().getColumn(3).setResizable(false);
+		tabListaUsuários.getColumnModel().getColumn(3).setMinWidth(115);
+
+		tabListaUsuários.getTableHeader().setReorderingAllowed(false);
+		
+		UsuarioDAO dao = new UsuarioDAO();
+		for (Usuario u : dao.mostrarUsuarios()) {
+			modelo.addRow(new Object[] { u.getIdUsuario(), u.getCpf(), u.getNome(), u.getEmail() });
+		}
+
+		JScrollPane spListaUsuários = new JScrollPane();
+		spListaUsuários.setBounds(10, 22, 444, 149);
+		panelUsuariosCadastrados.add(spListaUsuários);
+
+		spListaUsuários.setViewportView(tabListaUsuários);
+	}
+
+	private void obterCPF(Usuario usr) {
+
+		usr.setCpf((String) tabListaUsuários.getValueAt(tabListaUsuários.getSelectedRow(), 0));// DEFINE O CPF DO USUARIO QUE FOI CLICADO
+
+	}
+}
